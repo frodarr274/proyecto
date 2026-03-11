@@ -1,2 +1,1 @@
-print("Hola mundo")
-print("Hola")
+print ("Paco es el dueño de este proyecto")
