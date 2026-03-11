@@ -1,1 +1,1 @@
-print ("Paco es el dueño de este proyecto")
+print ("Paco ya no es el dueño de este proyecto")
