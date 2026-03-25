@@ -22,6 +22,34 @@ def create(ciudad,comunidades,provincias):#los parámetros son los nombres de la
     conexion.commit()
     conexion.close()
 
+    cursor.execute(''' INSERT INTO provincias (id_provincia,nombre,id_comunidad) VALUES (?, ?, ?)''', (1,"Sevilla",1))
+
+    provincias= [
+        (2,"Valencia",1)
+        (3,"Barcelona",3)
+        (4,"Tarragona",3)
+        (5,"Murcia",4)
+        (6,"Madrid",2)
+    ]
+    cursor.executemany(''' INSERT INTO provincias (id_provincia,nombre,id_comunidad) VALUES(?, ?, ?)''', provincias)
+
+    conexion.commit()
+    conexion.close()
+
+    cursor.execute (''' INSERT INTO ciudad (id_ciudad,nombre,id_provincia,alcalde) VALUES (?, ?, ?)''',(1,"Dos Hermanas",1,"Francisco Rodriguez"))
+
+    ciudad=[
+        (2,"Aledo",5,"Jose Ballesta")
+        (3,"Gandía",2,"María José Catala")
+        (4,"Alcobendas",6,"Jose Luis Martinez")
+    ]
+    cursor.executemany(''' INSERT INTO ciudad (id_ciudad,nombre,id_provincia,alcalde) VALUES(?, ?, ?)''', ciudad)
+
+    conexion.commit()
+    conexion.close()
+                                                                                            
+
+
 
 
 
