@@ -66,12 +66,12 @@ class SistemaGeograficoEspaña:
 
             elif opcion_elegida == '5':
                 repetir_comunidades = False
- #seguir con las provincias
- # --- SECCIÓN DE PROVINCIAS (Nivel 2) ---
+ 
+ # --- SECCIÓN DE PROVINCIAS ---
     def gestionar_provincias(self):
         repetir_provincias = True
         while repetir_provincias:
-            print("\n--- MENÚ PROVINCIAS ---")
+            print("--- MENÚ PROVINCIAS ---")
             print("1. Ver todas las provincias")
             print("2. Añadir nueva provincia")
             print("3. Actualizar provincia")
@@ -119,4 +119,40 @@ class SistemaGeograficoEspaña:
 
             elif opcion_elegida == '5':
                 repetir_provincias = False
-  #Continuar con las ciudades 
+ 
+   # --- SECCIÓN DE CIUDADES---
+    def gestionar_ciudades(self):
+        repetir_ciudades = True
+        while repetir_ciudades:
+            print("--- MENÚ CIUDADES ---")
+            print("1. Ver ciudades")
+            print("2. Añadir ciudad")
+            print("3. Volver")
+            
+            opcion_elegida = input("Elija: ")
+
+            if opcion_elegida == '1':
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM ciudad")
+                lista_ciudades = cursor.fetchall()
+                for fila in lista_ciudades:
+                    print(fila)
+                conexion.close()
+
+            elif opcion_elegida == '2':
+                nombre_ciudad = input("Nombre de la ciudad: ")
+                id_provincia_padre = int(input("ID de la provincia a la que pertenece: "))
+                alcalde = input("Nombre del alcalde: ")
+                
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("INSERT INTO ciudad (nombre, id_provincia, alcalde) VALUES (?, ?, ?)", 
+                               (nombre_ciudad, id_provincia_padre, alcalde))
+                conexion.commit()
+                conexion.close()
+
+            elif opcion_elegida == '3':
+                repetir_ciudades = False
+
+#faltaría el menú
