@@ -67,5 +67,56 @@ class SistemaGeograficoEspaña:
             elif opcion_elegida == '5':
                 repetir_comunidades = False
  #seguir con las provincias
+ # --- SECCIÓN DE PROVINCIAS (Nivel 2) ---
+    def gestionar_provincias(self):
+        repetir_provincias = True
+        while repetir_provincias:
+            print("\n--- MENÚ PROVINCIAS ---")
+            print("1. Ver todas las provincias")
+            print("2. Añadir nueva provincia")
+            print("3. Actualizar provincia")
+            print("4. Borrar provincia")
+            print("5. Volver")
+            
+            opcion_elegida = input("Elija opción: ")
 
-  
+            if opcion_elegida == '1':
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("SELECT * FROM provincias")
+                lista_provincias = cursor.fetchall()
+                for fila in lista_provincias:
+                    print(fila)
+                conexion.close()
+
+            elif opcion_elegida == '2':
+                nombre_provincia = input("Nombre de la provincia: ")
+                id_comunidad_padre = int(input("ID de la comunidad a la que pertenece: "))
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("INSERT INTO provincias (nombre, id_comunidad) VALUES (?, ?)", 
+                               (nombre_provincia, id_comunidad_padre))
+                conexion.commit()
+                conexion.close()
+
+            elif opcion_elegida == '3':
+                id_modificar = int(input("ID de la provincia a modificar: "))
+                nombre = input("Nuevo nombre: ")
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("UPDATE provincias SET nombre = ? WHERE id = ?", (nombre, id_modificar))
+                conexion.commit()
+                conexion.close()
+
+            elif opcion_elegida == '4':
+                id_borrar = int(input("ID de la provincia a eliminar: "))
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("DELETE FROM provincias WHERE id = ?", (id_borrar,))
+                conexion.commit()
+                conexion.close()
+                print("Provincia borrada.")
+
+            elif opcion_elegida == '5':
+                repetir_provincias = False
+  #Continuar con las ciudades 
