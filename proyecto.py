@@ -155,4 +155,43 @@ class SistemaGeograficoEspaña:
             elif opcion_elegida == '3':
                 repetir_ciudades = False
 
-#faltaría el menú
+#esto es el menú principal
+
+def iniciar_todo():
+
+    # Creamos el objeto principal 
+    app = SistemaGeograficoEspaña('vivaespana.db')
+    
+    ejecutar = True
+    while ejecutar:
+        print("===============================")
+        print(" GESTOR DE GEOGRAFÍA DE ESPAÑA")
+        print("===============================")
+        print("1. COMUNIDADES")
+        print("2. PROVINCIAS")
+        print("3. CIUDADES")
+        print("4. SALIR")
+        
+        opcion_menu = input("¿Con qué tabla quieres trabajar?: ")
+
+        if opcion_menu == '1':
+            app.gestionar_comunidades()
+        elif opcion_menu == '2':
+            app.gestionar_provincias()
+        elif opcion_menu == '3':
+            app.gestionar_ciudades()
+        elif opcion_menu == '4':
+            print("Saliendo del programa... ¡Adiós!")
+            ejecutar = False
+
+if __name__ == "__main__":
+    iniciar_todo()                     
+
+
+
+
+
+
+
+
+                                
