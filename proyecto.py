@@ -158,7 +158,7 @@ class SistemaGeograficoEspaña:
                 nuevo_alcalde = input("Nombre del nuevo alcalde: ")
                 conexion = self.abrir_conexion()
                 cursor = conexion.cursor()
-                cursor.execute("UPDATE ciudad SET alcalde = ? WHERE id = ?", (nuevo_alcalde, id_mod))
+                cursor.execute("UPDATE ciudad SET alcalde = ? WHERE id = ?", (nuevo_alcalde, id_modificar))
                 conexion.commit()
                 conexion.close()
 
