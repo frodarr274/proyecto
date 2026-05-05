@@ -119,15 +119,17 @@ class SistemaGeograficoEspaña:
 
             elif opcion_elegida == '5':
                 repetir_provincias = False
- 
-   # --- SECCIÓN DE CIUDADES---
+
+  # --- SECCIÓN DE CIUDADES ---
     def gestionar_ciudades(self):
         repetir_ciudades = True
         while repetir_ciudades:
             print("--- MENÚ CIUDADES ---")
             print("1. Ver ciudades")
             print("2. Añadir ciudad")
-            print("3. Volver")
+            print("3. Actualizar ciudad")
+            print("4. Borrar ciudad")
+            print("5. Volver")
             
             opcion_elegida = input("Elija: ")
 
@@ -144,7 +146,6 @@ class SistemaGeograficoEspaña:
                 nombre_ciudad = input("Nombre de la ciudad: ")
                 id_provincia_padre = int(input("ID de la provincia a la que pertenece: "))
                 alcalde = input("Nombre del alcalde: ")
-                
                 conexion = self.abrir_conexion()
                 cursor = conexion.cursor()
                 cursor.execute("INSERT INTO ciudad (nombre, id_provincia, alcalde) VALUES (?, ?, ?)", 
@@ -153,6 +154,24 @@ class SistemaGeograficoEspaña:
                 conexion.close()
 
             elif opcion_elegida == '3':
+                id_modificar = int(input("ID de la ciudad a modificar: "))
+                nuevo_alcalde = input("Nombre del nuevo alcalde: ")
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("UPDATE ciudad SET alcalde = ? WHERE id = ?", (nuevo_alcalde, id_mod))
+                conexion.commit()
+                conexion.close()
+
+            elif opcion_elegida == '4':
+                id_borrar = int(input("ID de la ciudad a eliminar: "))
+                conexion = self.abrir_conexion()
+                cursor = conexion.cursor()
+                cursor.execute("DELETE FROM ciudad WHERE id = ?", (id_borrar,))
+                conexion.commit()
+                conexion.close()
+                print("Ciudad eliminada.")
+
+            elif opcion_elegida == '5':
                 repetir_ciudades = False
 
 #esto es el menú principal
